@@ -1,7 +1,10 @@
 package randAlgs
 
 // IndMatrix represents a graph as incidence matrix.
-type IndMatrix []int
+type IndMatrix  struct {
+	values []int
+	dim int
+}
 
 // Returns i-th row of IndMatrix.
 func (im *IndMatrix) GetRow(i int) []int {
