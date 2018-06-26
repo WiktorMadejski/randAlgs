@@ -33,3 +33,28 @@ func (im *IndMatrix) GetRowValues(i int) []int {
 func (im *IndMatrix) GetColValues(i int) []int {
 	return make([]int, 0)
 }
+
+func CreateEmptyIndMatrix() IndMatrix {
+
+}
+
+func (im *IndMatrix) GetRowIndex(i int) int {
+	return im.dim * i
+}
+
+// Returns i-th row of IndMatrix.
+func (im *IndMatrix) GetRow(i int) []*int {
+	startIndex := im.GetRowIndex(i)
+	endIndex := im.GetRowIndex(i)*im.dim - 1
+	return im[startIndex:endIndex]
+}
+func (im *IndMatrix) AddTwoRows(i int, j int) {
+	startIndexToRemove := im.GetRowIndex(i)
+	endIndexToRemove := im.GetRowIndex(i) + im.dim - 1
+	startIndexToKeep := im.GetRowIndex(i)
+	endIndexToKeep := im.GetRowIndex(i) + im.dim - 1
+
+	newRow := im[startIndexToKeep:endIndexToKeep] + im[startIndexToRemove:endIndexToRemove]
+	im[startIndexToRemove:endIndexToRemove] = nil
+	im[startIndexToRemove:endIndexToRemove] = newRow
+}
